@@ -1,0 +1,204 @@
+-- THIS FILE IS GENERATED. DON'T TOUCH IT!!!
+
+model M
+
+enum Etat {
+    ok,
+    hs
+}
+
+enum Model {
+    electrique,
+    mecanique
+}
+
+enum TypeStation {
+    vplus,
+    vmoins,
+    vnulle
+}
+
+class Station
+    attributes
+        adresse : String
+        numStation : Integer
+        type : TypeStation
+end
+
+class Bornette
+    attributes
+        numeroBornette : Integer
+        etat : Etat
+        disponibe : Boolean
+end
+
+class Velo
+    attributes
+        numeroVelo : Integer
+        model : Model
+        dateMiseEnService : String
+        etat : Etat
+end
+
+class Location
+    attributes
+        numeroLocation : Integer
+        numeroUtlisateur : Integer
+        dateDeLocation : String
+        cout : Double
+end
+
+class Utilisateur < Utilisateur
+    attributes
+        nomeroUtilisateur : Integer
+        numeroCB : String
+        credit : Integer
+end
+
+class Abonne < Utilisateur
+    attributes
+        numeroCB : String
+        codeSecret : Integer
+        prenom : String
+        sexe : String
+        adresse : String
+        dateDeNaissance : String
+end
+
+class Client < Client, Utilisateur
+end
+
+class Maintenance
+    attributes
+        idMainteance : Integer
+        numeroVelo : Interger
+        descriptionPanne : String
+end
+
+class Abonnement
+    attributes
+        dateDebut : String
+        dateFin : String
+end
+
+class Garage
+    attributes
+        numeroVelo : Integer
+        numeroBornette : Integer
+        dateGarage : String
+end
+
+association Possede
+    between
+        Station[1] role station
+        Bornette[1..*] role bornettes
+end
+
+association 
+    between
+        Bornette[] role 
+        Bornette[] role 
+end
+
+association 
+    between
+        Bornette[] role 
+        Garage[] role 
+end
+
+association 
+    between
+        Bornette[] role 
+        Velo[] role 
+end
+
+association PeutAvoir
+    between
+        Bornette[1] role bornetteGarages
+        Garage[0..*] role garagesBornettes
+end
+
+association PeutEtre
+    between
+        Velo[1] role veloMaintenance
+        Maintenance[0..*] role maintencance
+end
+
+association 
+    between
+        Location[] role 
+        Utilisateur[] role 
+end
+
+association 
+    between
+        Location[] role 
+        Velo[] role 
+end
+
+association Concerne
+    between
+        Location[0..*] role locations
+        Velo[1] role velo
+end
+
+association 
+    between
+        Utilisateur[] role 
+        Client[] role 
+end
+
+association 
+    between
+        Utilisateur[] role 
+        Velo[] role 
+end
+
+association 
+    between
+        Utilisateur[] role 
+        Location[0..*] role 
+end
+
+association Loue
+    between
+        Utilisateur[1] role utilisateur
+        Location[0..*] role locationUtilisateurs
+end
+
+association PeutAvoir
+    between
+        Abonne[1] role abonne
+        Abonnement[1..*] role abonnements
+end
+
+association 
+    between
+        Etat[] role 
+        Bornette[] role 
+end
+
+association 
+    between
+        Model[] role 
+        Velo[] role 
+end
+
+association PeutEtreGare
+    between
+        Garage[0..*] role garageVelos
+        Velo[1] role velos
+end
+
+association 
+    between
+        Etat[] role 
+        Velo[] role 
+end
+
+association 
+    between
+        TypeStation[] role 
+        Station[] role 
+end
+
